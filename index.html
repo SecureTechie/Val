@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Will you be my Valentine?</title>
-
+  
   <!-- Confetti library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
@@ -130,6 +130,10 @@
 </head>
 
 <body>
+  <audio id="bgMusic" loop>
+    <source src="helplessly.mp3" type="audio/mpeg">
+  </audio>
+
   <canvas id="confettiCanvas"></canvas>
 
   <main class="card">
@@ -291,8 +295,12 @@
 
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
+      const music = document.getElementById("bgMusic");
+      music.volume = 0.4;
+      music.play().catch(err => console.log("Audio blocked:", err));
+
       zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
+      hint.style.display = "none";
       result.style.display = "block";
       resizeConfettiCanvas();
       fullScreenConfetti();
